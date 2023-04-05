@@ -30,7 +30,7 @@ namespace Flurl.Http.PagedEnumerable
             new PagedAsyncEnumerator(this.request, this.nextSelector, cancellationToken);
 
         /// <summary>
-        /// Asynchrously iterates over a collection of paged requests.
+        /// Asynchronously iterates over a collection of paged requests.
         /// </summary>
         /// <remarks>
         /// The next request endpoint will be resolved from the response of the previous response.
@@ -58,7 +58,7 @@ namespace Flurl.Http.PagedEnumerable
             public T Current { get; private set; }
 
             /// <inheritdoc />
-            public ValueTask DisposeAsync() =>  ValueTask.CompletedTask;
+            public ValueTask DisposeAsync() => ValueTask.CompletedTask;
 
             /// <inheritdoc />
             public async ValueTask<bool> MoveNextAsync()
@@ -68,7 +68,7 @@ namespace Flurl.Http.PagedEnumerable
                     return false;
                 }
 
-                if (this.next is null)
+                if (this.next is null || string.IsNullOrWhiteSpace(this.next.Url))
                 {
                     return false;
                 }
