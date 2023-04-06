@@ -8,7 +8,7 @@ This example shows the asynchronous version, but the synchronous version is also
 var responses = await "https://api.mysite.com"
     .AppendPathSegment("users")
     .SetQueryParams(new { limit = 50, offset = 0})
-    .AsPagedAsyncEnumerable<UsersResponse>(r => r.HasNext ? r.Next : null);
+    .AsPagedAsyncEnumerable<UsersResponse>(r => r.Next);
 
 // Requests are made for each page only when the collection is iterated. 
 await foreach(var response in responses)
